@@ -5,23 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0cbbfc32-e497-429b-a502-f793df761604" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/TasksController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/TaskStoreRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Task.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/TaskStatus.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Policies/TaskPolicy.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/factories/TaskFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_04_09_112504_create_task_statuses_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_04_09_113047_create_tasks_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/admin/task.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Role.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Role.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_04_09_074105_create_user_role_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_04_09_074105_create_role_user_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/AdminSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/AdminSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/EmployeeSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/EmployeeSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TasksController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TasksController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Task.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Task.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/factories/TaskFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/TaskFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_04_09_113047_create_tasks_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_04_09_113047_create_tasks_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/admin/task.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/admin/task.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/Feature/Admin/TaskTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/Admin/TaskTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -179,6 +168,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="ToolWindowRun.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/routes/admin" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -195,7 +185,11 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="PHPUnit.TaskTest.test_the_admin_can_store_new_task">
+  <component name="RunManager" selected="PHPUnit.TaskTest.test_the_admin_can_see_all_tasks">
+    <configuration name="TaskTest.test_the_admin_can_see_all_tasks" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\Admin\TaskTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Feature/Admin/TaskTest.php" method="test_the_admin_can_see_all_tasks" scope="Method" />
+      <method v="2" />
+    </configuration>
     <configuration name="TaskTest.test_the_admin_can_store_new_task" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="Tests\Feature\Admin\TaskTest" configuration_file="$PROJECT_DIR$/phpunit.xml" file="$PROJECT_DIR$/tests/Feature/Admin/TaskTest.php" method="test_the_admin_can_store_new_task" scope="Method" />
       <method v="2" />
@@ -214,6 +208,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="PHPUnit.TaskTest.test_the_admin_can_see_all_tasks" />
         <item itemvalue="PHPUnit.TaskTest.test_the_admin_can_store_new_task" />
         <item itemvalue="PHPUnit.TaskTest.test_we_have_already_an_admin_user_in_database" />
         <item itemvalue="PHPUnit.TaskTest.test_we_have_already_three_employee" />
@@ -236,7 +231,7 @@
       <workItem from="1617949872131" duration="4321000" />
       <workItem from="1617955933965" duration="368000" />
       <workItem from="1617956527122" duration="462000" />
-      <workItem from="1617960521223" duration="11197000" />
+      <workItem from="1617960521223" duration="13462000" />
     </task>
     <servers />
   </component>
