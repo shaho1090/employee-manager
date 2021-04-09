@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskStoreRequest;
+use App\Models\Role;
 use App\Models\Task;
+use Exception;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -17,7 +18,8 @@ class TasksController extends Controller
         $tasks = Task::all();
 
         return view('admin.task.index',[
-            'tasks' => $tasks
+            'tasks' => $tasks,
+            'employees' => Role::employee()->first()->users()->get()
         ]);
     }
 
@@ -49,6 +51,10 @@ class TasksController extends Controller
      */
     public function destroy(Task $task): RedirectResponse
     {
+        if($task->isAssigned()){
+            throw new Exception('This task is already assigned you can not delete it!');
+        }
+
         $task->delete();
 
         return Redirect::back();
