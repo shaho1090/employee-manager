@@ -36,7 +36,7 @@ class Task extends Model
 
     public function getStatusAttribute()
     {
-        return TaskStatus::where('id',$this->status_id)->first()->title;
+        return TaskStatus::where('id', $this->status_id)->first()->title;
     }
 
     /**
@@ -50,12 +50,12 @@ class Task extends Model
             'time' => Carbon::parse((int)($request['time']))->toTimeString(),
             'status_id' => TaskStatus::toDo()->id,
             'creator_id' => auth()->user()->id,
-            ]);
+        ]);
     }
 
     public function owner(): BelongsTo
     {
-        return $this->belongsTo(User::class,'creator_id');
+        return $this->belongsTo(User::class, 'creator_id');
     }
 
     /**
@@ -63,28 +63,30 @@ class Task extends Model
      */
     public function assignTo(User $user)
     {
-        if($this->isAssigned()){
+        if ($this->isAssigned()) {
             throw new Exception('This task already assigned!');
         }
 
-         $this->users()->attach($user);
+        $this->users()->attach($user);
 
-         $this->update([
-             'status_id' => TaskStatus::inProgress()->id
-         ]);
+        $this->update([
+            'status_id' => TaskStatus::inProgress()->id
+        ]);
 
-         $this->refresh();
+        $this->refresh();
     }
 
     public function unassignFrom(User $user)
     {
-        $this->users()->detach($user);
+        if ($this->isInProgress()) {
+            $this->users()->detach($user);
 
-        $this->update([
-            'status_id' => TaskStatus::toDo()->id
-        ]);
+            $this->update([
+                'status_id' => TaskStatus::toDo()->id
+            ]);
 
-        $this->refresh();
+            $this->refresh();
+        }
     }
 
     public function users(): BelongsToMany
@@ -95,5 +97,19 @@ class Task extends Model
     public function isAssigned()
     {
         return $this->users()->first();
+    }
+
+    public function isAssignedTo(User $employee)
+    {
+        return $this->users()->where('user_id', $employee->id)->first();
+    }
+
+    public function isInProgress(): bool
+    {
+        if ((int)$this->status_id === (int)TaskStatus::inProgress()->id) {
+            return true;
+        }
+
+        return false;
     }
 }
