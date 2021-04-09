@@ -67,7 +67,7 @@ class TaskPolicy
      */
     public function delete(User $user, Task $task)
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
