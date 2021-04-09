@@ -14,11 +14,11 @@ class TaskPolicy
      * Determine whether the user can view any models.
      *
      * @param  \App\Models\User  $user
-     * @return mixed
+     * @return bool
      */
-    public function viewAny(User $user)
+    public function viewAny(User $user): bool
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
@@ -30,7 +30,9 @@ class TaskPolicy
      */
     public function view(User $user, Task $task)
     {
-        //
+        if($user->isAdmin()){
+            return true;
+        };
     }
 
     /**
