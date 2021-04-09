@@ -15,7 +15,12 @@ class Task extends Model
         'name',
         'note',
         'time',
-        'status_id'
+        'status_id',
+        'creator_id'
+    ];
+
+    protected $appends = [
+        'status',
     ];
 
 //    protected $casts = [
@@ -27,16 +32,28 @@ class Task extends Model
         return $this->belongsTo(TaskStatus::class);
     }
 
+    public function getStatusAttribute()
+    {
+        return TaskStatus::where('id',$this->status_id)->first()->title;
+    }
+
     /**
      * @throws \Exception
      */
     public function createNew($request)
     {
+//        dd($request['time']);
         return $this->create([
             'name' => $request['name'],
             'note' => $request['note'],
-            'time' => Carbon::parse($request['time'])->toTimeString(),
-            'status_id' => TaskStatus::toDo()->id
+            'time' => Carbon::parse((int)($request['time']))->toTimeString(),
+            'status_id' => TaskStatus::toDo()->id,
+            'creator_id' => auth()->user()->id,
             ]);
+    }
+
+    public function owner(): BelongsTo
+    {
+        return $this->belongsTo(User::class,'creator_id');
     }
 }
