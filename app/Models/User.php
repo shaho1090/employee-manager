@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -40,4 +41,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function isAdmin(): bool
+    {
+        if ( is_null($this->roles()->where('role_id', Role::admin()->first()->id)->first())) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function tasks(): BelongsToMany
+    {
+        return $this->belongsToMany(Task::class);
+    }
 }
+
