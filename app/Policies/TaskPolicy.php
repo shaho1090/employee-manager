@@ -55,7 +55,11 @@ class TaskPolicy
      */
     public function update(User $user, Task $task)
     {
-        //
+        if($user->isAdmin()){
+            return true;
+        }
+
+        return $task->isAssignedTo($user);
     }
 
     /**
