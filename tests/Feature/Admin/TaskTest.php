@@ -3,6 +3,7 @@
 namespace Tests\Feature\Admin;
 
 use App\Models\Role;
+use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
 use Carbon\Carbon;
@@ -39,6 +40,9 @@ class TaskTest extends TestCase
         $this->assertEquals(3,  $employees->count());
     }
 
+    /**
+     * @throws \Exception
+     */
     public function test_the_admin_can_store_new_task()
     {
         $this->withoutExceptionHandling();
@@ -59,9 +63,29 @@ class TaskTest extends TestCase
             'name' => $taskData['name'],
             'note' => $taskData['note'],
             'time' => Carbon::parse($taskData['time'])->toTimeString(),
-            'status_id' =>  TasKStatus::ToDo()->id
+            'status_id' =>  TasKStatus::ToDo()->id,
+            'creator_id' => $this->admin->id
         ]);
     }
+
+    public function test_the_admin_can_see_all_tasks()
+    {
+        $this->be($this->admin);
+
+        $tasks = Task::factory(3)->create()->toArray();
+
+        $this->get(route('task.index'))->assertSee([
+            'name' => $tasks[0]['name'],
+            'note' =>  $tasks[0]['note']
+        ])->assertSee([
+            'name' => $tasks[1]['name'],
+            'note' =>  $tasks[1]['note']
+        ])->assertSee([
+            'name' => $tasks[2]['name'],
+            'note' =>  $tasks[2]['note']
+        ]);
+    }
+
 
 
 }
