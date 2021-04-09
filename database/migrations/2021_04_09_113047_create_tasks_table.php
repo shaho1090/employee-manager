@@ -18,6 +18,7 @@ class CreateTasksTable extends Migration
             $table->string('name');
             $table->text('note');
             $table->foreignId('status_id')->constrained('task_statuses');
+            $table->foreignId('creator_id')->constrained('users');
             $table->time('time');
             $table->timestamps();
         });
