@@ -55,5 +55,10 @@ class User extends Authenticatable
 
         return true;
     }
+
+    public function tasks(): BelongsToMany
+    {
+        return $this->belongsToMany(Task::class);
+    }
 }
 
