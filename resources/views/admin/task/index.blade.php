@@ -57,7 +57,7 @@
                             {{ $task->status }}
                         </td>
                         <td>
-                            {{ date('Y_m_d',strtotime($task->done_at)) }}
+                            {{ ($task->done_at ? date('Y_m_d',strtotime($task->done_at)) : '_ _ _') }}
                         </td>
                         <td>
                             {{ $task->owner }}
