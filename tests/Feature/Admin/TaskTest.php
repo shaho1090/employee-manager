@@ -57,7 +57,7 @@ class TaskTest extends TestCase
             'time' => 14,
         ];
 
-        $this->post(route('task.store'),$taskData)->dump();
+        $this->post(route('task.store'),$taskData);
 
         $this->assertDatabaseHas('tasks',[
             'name' => $taskData['name'],
@@ -70,19 +70,18 @@ class TaskTest extends TestCase
 
     public function test_the_admin_can_see_all_tasks()
     {
+        $this->withoutExceptionHandling();
+
         $this->be($this->admin);
 
         $tasks = Task::factory(3)->create()->toArray();
 
-        $this->get(route('task.index'))->assertSee([
+        $this->get(route('admin.task.index'))->assertSee([
             'name' => $tasks[0]['name'],
-            'note' =>  $tasks[0]['note']
         ])->assertSee([
             'name' => $tasks[1]['name'],
-            'note' =>  $tasks[1]['note']
         ])->assertSee([
             'name' => $tasks[2]['name'],
-            'note' =>  $tasks[2]['note']
         ]);
     }
 
