@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Filters\QueryFilter;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,39 +19,47 @@ class Task extends Model
         'note',
         'time',
         'status_id',
+        'done_at',
         'creator_id'
     ];
 
     protected $appends = [
         'status',
+        'owner'
     ];
-
-//    protected $casts = [
-//        'time' => 'time'
-//    ];
-
-    public function status(): BelongsTo
-    {
-        return $this->belongsTo(TaskStatus::class);
-    }
 
     public function getStatusAttribute()
     {
         return TaskStatus::where('id', $this->status_id)->first()->title;
     }
 
+    public function getOwnerAttribute()
+    {
+        return $this->owner()->first()->name;
+    }
+
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(TaskStatus::class);
+    }
+
     /**
-     * @throws \Exception
+     * @param $request
+     * @throws Exception
      */
     public function createNew($request)
     {
-        return $this->create([
+        $task = $this->create([
             'name' => $request['name'],
             'note' => $request['note'],
             'time' => Carbon::parse((int)($request['time']))->toTimeString(),
             'status_id' => TaskStatus::toDo()->id,
             'creator_id' => auth()->user()->id,
         ]);
+
+        if(!auth()->user()->isAdmin()){
+            $task->assignTo(auth()->user());
+        }
     }
 
     public function owner(): BelongsTo
@@ -59,6 +68,7 @@ class Task extends Model
     }
 
     /**
+     * @param User $user
      * @throws Exception
      */
     public function assignTo(User $user)
@@ -111,5 +121,10 @@ class Task extends Model
         }
 
         return false;
+    }
+
+    public function scopeFilter($query, QueryFilter $filters)
+    {
+        return $filters->apply($query);
     }
 }
